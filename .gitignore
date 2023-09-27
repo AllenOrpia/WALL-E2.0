@@ -1,3 +1,7 @@
+node_modules
+.env
+
+
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -12,5 +16,3 @@
 *.vsix
 
 
-node_modules
-.env
