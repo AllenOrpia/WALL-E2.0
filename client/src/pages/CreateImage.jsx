@@ -5,6 +5,7 @@ import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import Form from "../components/Form";
 import Loader from "../components/Loader";
+import axios from 'axios';
 
 const CreateImage = () => {
   const navigate = useNavigate();
@@ -16,9 +17,30 @@ const CreateImage = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted");
+    
+    if (form.prompt && form.photo) {
+      setLoading(true);
+
+      try {
+          await axios.post('http://localhost:3000/api/images', {
+          name : form.name,
+          photo : form.photo,
+          prompt : form.prompt
+        })
+        .then ( res => {
+          console.log(res);
+          navigate('/');
+        })
+      } catch (err) {
+          console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please enter prompt and generate image')
+    }
   };
 
   const handleChange = (e) => {
@@ -36,7 +58,34 @@ const CreateImage = () => {
         }
     })
   };
-  const generateImg = (e) => {};
+  const generateImg = async (e) => {
+    e.preventDefault();
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        await axios.post('http://localhost:3000/api/dalle', {
+          prompt: form.prompt,
+        })
+        .then( res => {
+          setForm({...form, photo: res.data.photo})
+          console.log(res)
+        })
+        .catch( err => {
+          console.log(err)
+        })
+
+      }
+      catch (error) {
+        console.log(error)
+      } finally {
+
+        setGeneratingImg(false);
+       
+      }
+    } else {
+      alert('please enter a prompt')
+    }
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -69,23 +118,22 @@ const CreateImage = () => {
           
           <div
             className="mt-5 relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
-            w-64 p-3 h-64 justify-center items-center"
+            w-64 h-64 p-3  justify-center items-center"
           >
-            {Form.photo ? (
+            {form.photo ? 
               <img
-                src={Form.photo}
-                alt={Form.prompt}
+                src={form.photo}
+                alt={form.prompt}
                 className="w-full h-full object-contain"
               >
-                {" "}
               </img>
-            ) : (
+             : 
               <img
                 src={preview}
                 alt="preview"
                 className="w-9/12 h-9/12 object-contain opacity-40"
               ></img>
-            )}
+            }
             {generatingImg && (
               <div className="absolute inset-0 z-0 flex justify-center items-center rounded-lg bg-[rgba(0,0,0,0.5)]">
                 <Loader />
@@ -103,7 +151,7 @@ const CreateImage = () => {
           </button>
         </div>
         <div className="mt-5 ">
-              <p>Feel free to share your image to the community! If so submit down below.</p>
+              <p className="mb-3">Do you want to share your creation to the community? If so press the button below!</p>
               <button className="text-white bg-purple-500 px-3 py-2 w-full sm:w-auto">
                 { loading? 'sharing...' : 'Share your image'}
               </button>

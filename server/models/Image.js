@@ -5,15 +5,15 @@ const Schema = mongoose.Schema;
 const imageSchema = new Schema({
     name: {
         type: String, 
-        required: [true, 'name is required']
+        required: true
     },
     prompt: {
         type: String, 
-        required: [true, 'prompt is required']
+        required: true
     },
     photo: {
         type: String, 
-        required: [true, 'photo is required']
+        required: true
     },
 })
 
