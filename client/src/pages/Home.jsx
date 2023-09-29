@@ -50,10 +50,10 @@ const Home = () => {
 
   return (
    <section className='max-w-7xl mx-auto'>
-        <div>
-            <h1 className=' font-bold'>Community Ideas</h1>
-            <p className='mt-3 text-slate-600 max-w[500px'>Browse the communities
-             collection of images made with this very website and DALL-E AI! </p>
+        <div >
+            <h1 className=' font-bold text-3xl'>Community Ideas</h1>
+            <p className='mt-3 text-slate-600 max-w[500px text-lg'>Browse and explore community creations! Find inspiration and
+            create your own image with the help of RapidApi's simple iteration of Open Ai's DALL-E</p>
         </div>
         <div className='mt-10'>
            <Form 
@@ -72,7 +72,7 @@ const Home = () => {
                 <>
                 { searchText && (
                     <h2 className=' font-medium text-slate-600'>
-                        Showing results for <span className='text-purple-500'>{searchText}</span>
+                        Showing results for <span className='text-500-red'>{searchText}</span>
                     </h2>
                 ) }
                 <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cold-1 gap-3'>

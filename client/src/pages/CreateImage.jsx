@@ -7,6 +7,7 @@ import Form from "../components/Form";
 import Loader from "../components/Loader";
 import axios from 'axios';
 
+
 const CreateImage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -29,10 +30,10 @@ const CreateImage = () => {
           photo : form.photo,
           prompt : form.prompt
         })
-        .then ( res => {
-          console.log(res);
-          navigate('/');
-        })
+          .then ( res => {
+            console.log(res);
+            navigate('/');
+          })
       } catch (err) {
           console.log(err);
       } finally {
@@ -89,13 +90,13 @@ const CreateImage = () => {
 
   return (
     <section className="max-w-7xl mx-auto">
-      <div>
-        <h1 className=" font-bold">Create</h1>
-        <p className="mt-3 text-slate-600 max-w[500px">
+      <div className="mx-auto w-3/4">
+        <h1 className=" font-bold text-3xl">Create</h1>
+        <p className="mt-3 text-slate-600 max-w[500px text-lg">
           With the help of DALL-E create cool and imaginative AI images!
         </p>
       </div>
-      <form action="" className="mt-10 max-w-3xl" onSubmit={handleSubmit}>
+      <form action="" className="mt-10 w-3/4 mx-auto" onSubmit={handleSubmit}>
         <div>
           <Form
             labelName="Your name"
@@ -118,7 +119,7 @@ const CreateImage = () => {
           
           <div
             className="mt-5 relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
-            w-64 h-64 p-3  justify-center items-center"
+             p-3  justify-center items-center w-64 h-64"
           >
             {form.photo ? 
               <img
@@ -145,15 +146,15 @@ const CreateImage = () => {
           <button
             type="button"
             onClick={generateImg}
-            className="text-white bg-purple-500 font-medium rounded-md text-md w-full sm:w-auto px-3 py-2"
+            className="text-white bg-red-500 font-medium rounded-md text-md w-full sm:w-auto px-3 py-2 hover:translate-x-2 hover:-translate-y-1 "
           >
             {generatingImg ? "Generating..." : "Generate"}
           </button>
         </div>
         <div className="mt-5 ">
               <p className="mb-3">Do you want to share your creation to the community? If so press the button below!</p>
-              <button className="text-white bg-purple-500 px-3 py-2 w-full sm:w-auto">
-                { loading? 'sharing...' : 'Share your image'}
+              <button className="text-white bg-red-500 px-3 py-2 w-full sm:w-auto hover:translate-x-2 hover:-translate-y-1" type="submit">
+                { loading ? 'sharing...' : 'Share image'}
               </button>
         </div>
       </form>

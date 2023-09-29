@@ -13,7 +13,7 @@ const App = () => {
             <Link to={'/'}>
               <img src={logo} alt="logo" className='w-28 object-contain'/>
             </Link>
-            <Link to={'/create-image'} className='font-medium text-white bg-purple-500 px-4 py-2 rounded-md'>
+            <Link to={'/create-image'} className='font-medium text-white bg-red-500 px-4 py-2 rounded-md'>
                 Create Image
             </Link>
         </header>
