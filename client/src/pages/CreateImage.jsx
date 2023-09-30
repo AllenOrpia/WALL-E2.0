@@ -89,10 +89,10 @@ const CreateImage = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto">
+    <section className="max-w-7xl mx-auto text-white">
       <div className="mx-auto w-3/4">
         <h1 className=" font-bold text-3xl">Create</h1>
-        <p className="mt-3 text-slate-600 max-w[500px text-lg">
+        <p className="mt-3  max-w[500px text-lg">
           With the help of DALL-E create cool and imaginative AI images!
         </p>
       </div>
@@ -110,7 +110,7 @@ const CreateImage = () => {
             labelName="Prompt"
             type="text"
             name="prompt"
-            placeholder={form.prompt}
+            placeholder={'A cat'}
             value={form.prompt}
             handleChange={handleChange}
             isSurpriseMe
@@ -118,7 +118,7 @@ const CreateImage = () => {
           />
           
           <div
-            className="mt-5 relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
+            className="mt-5 relative bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
              p-3  justify-center items-center w-64 h-64"
           >
             {form.photo ? 

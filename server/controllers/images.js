@@ -13,6 +13,7 @@ cloudinary.config({
 });
 
 export const getAllImages = async (req, res) => {
+    
     try {
         const images = await Image.find({});
         res.json({ data: images})

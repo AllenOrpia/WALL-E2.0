@@ -1,9 +1,16 @@
 import React from "react";
 import { download } from "../assets";
 import { downLoadImage } from "../utils";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { red } from "@mui/material/colors";
+import { Icon, IconButton } from "@mui/material";
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const Card = ({ _id, name, photo, prompt }) => {
+  const color = red[500]
   return (
     <div className="rounded-xl group relative shadow-hover:shadow-cardhover card">
       <img
@@ -15,25 +22,41 @@ const Card = ({ _id, name, photo, prompt }) => {
         <p className="text-white text-sm overflow-y-auto prompt">{prompt}</p>
         <div className="mt-5 flex justify-between items-center gap-2">
           <div className="flex items-center gap-2">
-            <div className=' w-7 h-7 rounded-full object-cover bg-red-400 flex justify-center content-center text-white text-md  '>
-                  {name[0]}
-            </div>
+            <Stack>
+              <Avatar sx={{ bgcolor: color}}>{name[0]}</Avatar>
+            </Stack>
             <p className="text-white text-md">{name}</p>
           </div>
-          <button
+          {/* <button
             type="button"
             onClick={() => {
               downLoadImage(_id, photo);
             }}
             className="outline-none bg-transparent border-none bg-red-400 rounded-full"
-          > 
-           <img
-              src={download}
-              alt="download"
-              className="w-6 h-6 object-contain invert"
-            />
+          >  */}
+          <div className="flex gap-2">
+            <IconButton   onClick={() => {
+                downLoadImage(_id, photo);
+              }}>
+              {/* <img
+                  src={download}
+                  alt="download"
+                  className="w-6 h-6 object-contain invert"
+                /> */}
+                <FileDownloadIcon className="text-white"></FileDownloadIcon>
+            </IconButton>
 
-          </button>
+            { 'sad' == name ? <IconButton>
+                <DeleteIcon className="text-white"></DeleteIcon>
+            </IconButton> :
+            '' }
+            
+
+          </div>
+
+          
+
+          {/* </button> */}
         </div>
       </div>
     
