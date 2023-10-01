@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
+import { toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
   const navigate = useNavigate();
     const [userForm, setUserForm] = useState({
@@ -19,15 +20,29 @@ const Register = () => {
         e.preventDefault();
     
         try {
-          await axios
+          const response = await axios
             .post("http://localhost:3000/api/register", {
               username: userForm.username,
               password: userForm.password,
             })
-            .then((res) => {
-              console.log(res);
-              navigate('/login')
-            });
+
+          if (response.data.message) {
+            setUserForm( currForm => {
+              return currForm = {
+                username: '',
+                password: ''
+              }
+            })
+            toast.error(response.data.message)
+            
+          } else {
+            navigate('/login')
+            toast.success(response.data.success)
+          }
+
+
+
+          
         } catch (err) {
           console.log(err);
         }
@@ -55,6 +70,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 id="password"
+                value={userForm.password}
                 onChange={handleChange}
                 className="outline outline-slate-200 w-full rounded-full px-3"
               />
@@ -66,6 +82,7 @@ const Register = () => {
               Register
             </button>
           </form>
+          <ToastContainer />
         </div>
       );
 }

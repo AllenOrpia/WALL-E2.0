@@ -7,10 +7,16 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useCookies } from "react-cookie";
 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LoginIcon from "@mui/icons-material/Login";
+
 
 const App = () => {
  
@@ -18,6 +24,7 @@ const App = () => {
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.removeItem("username")
+    toast.success('Logged out successfully!')
   }
   return (
     <>
@@ -64,7 +71,10 @@ const App = () => {
             <Route path="/register" element={<Register />}></Route>
           </Routes>
         </main>
+      <ToastContainer />
       </BrowserRouter>
+      
+      
     </>
   );
 };

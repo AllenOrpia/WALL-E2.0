@@ -14,20 +14,22 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const Card = ({ _id, name, photo, prompt, setAllPost, data }) => {
+const Card = ({ _id, name, photo, prompt, setAllData, data }) => {
   const color = red[500]
   const username = window.localStorage.getItem("username")
-  
+
+ 
   
   
   const deleteImage = (id) => {
     const filteredData = data.filter( (item) => {
-      return item != id
+      return item.id != id
     })
     
-    setAllPost( currPost => {
-      return currPost = [...filteredData] 
+    setAllData( currData => {
+      return currData.filter( e => e._id != id)
     })
+    
     try {
       axios.get(`http://localhost:3000/api/images/${id}`)
       .then( res => {

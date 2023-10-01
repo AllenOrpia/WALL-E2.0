@@ -1,10 +1,12 @@
 import React from "react";
 import Card from "./Card";
+import { useState } from "react";
 
 const RenderCards = ({ data, title, setAllPost }) => {
-  if (data?.length > 0) {
-    return data.map((post, i) => (
-        <Card key={post._id} setAllPost={setAllPost} data={data} {...post}  />
+  const [allData, setAllData] = useState(data)
+  if (allData?.length > 0) {
+    return allData.map((post, i) => (
+        <Card key={post._id} setAllData={setAllData} data={allData} {...post}  />
     ));
   } else {
     return (

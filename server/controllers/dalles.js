@@ -1,6 +1,12 @@
 
 import axios from 'axios';
 import * as dotenv from "dotenv";
+// import { v2 as cloudinary } from "cloudinary";
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_SECRET,
+// });
 
 dotenv.config();
 
@@ -22,7 +28,7 @@ const generateImg = async (req,res) => {
     try {
       const response = await axios.request(options);
       const imgSrc = response.data.url;
-      console.log(imgSrc);
+      // const photoUrl = await cloudinary.uploader.upload(imgSrc);
       res.json({ photo: imgSrc})
     } catch (error) {
       console.error(error);

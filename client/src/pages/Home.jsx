@@ -7,6 +7,8 @@ import Loader from '../components/Loader'
 import axios from 'axios';
 import RenderCards from '../components/RenderCards'
 
+
+
 const Home = () => {
     const [loading, setLoading] = useState(false);
     const [allPosts, setAllPost] = useState([]);
@@ -15,11 +17,7 @@ const Home = () => {
     const [searchResults, setSearchResults] = useState(null)
     const [searchTimeOut, setSearchTimeOut] = useState(null)
 
-    const filterData = (data) => {
-        setAllPost( currPost => {
-            return [...data]
-        })
-    }
+   
   
     useEffect( () => {
         const fetchPosts = async () => {

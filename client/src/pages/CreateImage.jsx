@@ -28,15 +28,13 @@ const CreateImage = () => {
       setLoading(true);
 
       try {
-          await axios.post('http://localhost:3000/api/images', {
+        const response =  await axios.post('http://localhost:3000/api/images', {
           name: form.name,
           photo : form.photo,
           prompt : form.prompt
         })
-          .then ( res => {
-            console.log(res);
-            navigate('/');
-          })
+        console.log(response.data)
+        navigate('/')
       } catch (err) {
           console.log(err);
       } finally {
@@ -72,7 +70,7 @@ const CreateImage = () => {
         })
         .then( res => {
           setForm({...form, photo: res.data.photo})
-          console.log(res)
+          console.log(res.data)
         })
         .catch( err => {
           console.log(err)
@@ -82,7 +80,6 @@ const CreateImage = () => {
       catch (error) {
         console.log(error)
       } finally {
-
         setGeneratingImg(false);
        
       }

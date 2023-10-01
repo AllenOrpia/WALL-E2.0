@@ -8,6 +8,11 @@ import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
+
+    if (username == '' || password == '') {
+        return res.json( {message : 'Username and Password cant be blank'})
+    }
+
     const user = await User.findOne({ username: username});
 
     if (!user) {
@@ -22,7 +27,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id}, process.env.TOKEN_SECRET)
 
-    res.json({username: user.username, token,  message: 'Succesfully Logged in!'})
+    res.json({username: user.username, token,  success: 'Succesfully Logged in!'})
      
 
 }
@@ -30,7 +35,13 @@ export const login = async (req, res) => {
 
 export const register = async (req,res) => {
     const { username, password } = req.body;
+
+    if (username == '' || password == '') {
+        return res.json( {message : 'Username and Password cant be blank'})
+    }
+    
     const user = await User.findOne({ username: username });
+    
 
     if (user) {
         return res.json({ message: 'User already exists!'})
@@ -40,7 +51,7 @@ export const register = async (req,res) => {
     const newUser = new User({  username, password: hashedPassword})
     await newUser.save()
 
-    res.json({ message: 'Successfully registered!'})
+    res.json({ success: 'Successfully registered!'})
     
 }
 

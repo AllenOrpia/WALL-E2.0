@@ -4,6 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie"
 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,10 +32,24 @@ const Login = () => {
           password: userForm.password,
         })
 
-        setCookies("access_token", response.data.token);
-        window.localStorage.setItem("username", response.data.username)
-        navigate("/")
+        if (!response.data.username) {
+          setUserForm( currForm => {
+            return currForm = {
+              username : '',
+              password : ''
+          }
+          })
+          navigate('/login')
+          toast.error(response.data.message)
+        } else {
+          toast.success('Successfully logged in!')
+          
+          setCookies("access_token", response.data.token);
+          window.localStorage.setItem("username", response.data.username)
+          navigate("/")
+        }
         
+
     } catch (err) {
       console.log(err);
     }
@@ -60,6 +77,7 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
+            value={userForm.password}
             onChange={handleChange}
             className="outline outline-slate-200 w-full rounded-full px-3"
           />
@@ -71,6 +89,7 @@ const Login = () => {
           Login 
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
