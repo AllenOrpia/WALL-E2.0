@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const imageSchema = new Schema({
     name: {
-        type: String, 
+        type: String,
         required: true
     },
     prompt: {
@@ -15,6 +15,11 @@ const imageSchema = new Schema({
         type: String, 
         required: true
     },
+    // creator: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'users',
+    //     required: true
+    // }
 
 })
 

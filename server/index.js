@@ -15,9 +15,9 @@ app.use(express.json({ limit: "50mb" }));
 
 
 
-app.use("/api/images", imageRoutes);
+app.use("/api/images/", imageRoutes);
 app.use('/api/dalle', dalleRoutes)
-app.use('/', userRoutes)
+app.use('/api/', userRoutes)
 
 connectDb(process.env.DB_ATLAS_URL)
 

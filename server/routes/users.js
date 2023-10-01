@@ -5,6 +5,8 @@ import { login, register} from '../controllers/users.js';
 
 const router = express.Router();
 
+
+
 router.route('/login')
     .post(login)
 

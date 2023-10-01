@@ -12,7 +12,7 @@ const Form = ({
   handleSurpriseMe,
 }) => {
   return (
-    <div className="text-white">
+    <div className="text-black">
       <div className="flex items-center gap-2 mb-2 mt-3 ">
         <label
           htmlFor={name}
@@ -24,7 +24,7 @@ const Form = ({
           <button
             type="button"
             onClick={handleSurpriseMe}
-            className="font-semibold text-xs  bg-red-500 py-1  px-2 rounded-md"
+            className="font-semibold text-xs  bg-red-400 py-1  px-2 rounded-full text-white"
           >
             Surprise Me
           </button>
@@ -38,7 +38,7 @@ const Form = ({
         value={value}
         onChange={handleChange}
         required
-        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-red-300 focus:border-red-300 focus:shadow-lg focus:shadow-red-400
+        className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:shadow-lg focus:shadow-red-400
               outline-none block w-full p-2 text-black"
       />
     </div>

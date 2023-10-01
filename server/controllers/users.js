@@ -22,7 +22,7 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id}, process.env.TOKEN_SECRET)
 
-    res.json({userId: user._id, token,  message: 'Succesfully Logged in!'})
+    res.json({username: user.username, token,  message: 'Succesfully Logged in!'})
      
 
 }
@@ -43,3 +43,4 @@ export const register = async (req,res) => {
     res.json({ message: 'Successfully registered!'})
     
 }
+

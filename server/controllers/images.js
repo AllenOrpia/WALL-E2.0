@@ -33,11 +33,25 @@ export const createImage = async (req, res) => {
           prompt: prompt,
           photo: photoUrl.url,
         });
-  
+        
+        
         res.json({ data: newImage });
         
       } catch (err) {
           console.log(err)
       }
+}
+
+export const deleteImage = async (req,res) => {
+  try {
+    const { id } = req.params;
+    console.log(id)
+    await Image.findByIdAndDelete(id)
+  
+    res.json({message: "Successfully Deleted"})
+
+  } catch (err) {
+    console.log(err)
+  }
 }
 

@@ -6,11 +6,46 @@ import Stack from '@mui/material/Stack';
 import { red } from "@mui/material/colors";
 import { Icon, IconButton } from "@mui/material";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
-const Card = ({ _id, name, photo, prompt }) => {
+
+
+const Card = ({ _id, name, photo, prompt, setAllPost, data }) => {
   const color = red[500]
+  const username = window.localStorage.getItem("username")
+  
+  
+  
+  const deleteImage = (id) => {
+    const filteredData = data.filter( (item) => {
+      return item != id
+    })
+    
+    setAllPost( currPost => {
+      return currPost = [...filteredData] 
+    })
+    try {
+      axios.get(`http://localhost:3000/api/images/${id}`)
+      .then( res => {
+        
+          console.log(res)
+         
+        })
+
+    } catch(err) {
+      console.log(err)
+    } finally {
+      setAllPost(filteredData)
+    }
+
+  }
+
+
+  
   return (
     <div className="rounded-xl group relative shadow-hover:shadow-cardhover card">
       <img
@@ -46,9 +81,14 @@ const Card = ({ _id, name, photo, prompt }) => {
                 <FileDownloadIcon className="text-white"></FileDownloadIcon>
             </IconButton>
 
-            { 'sad' == name ? <IconButton>
-                <DeleteIcon className="text-white"></DeleteIcon>
-            </IconButton> :
+            { username == name ? (
+              
+                <IconButton onClick={ () => deleteImage(_id)}>
+                  <DeleteIcon className="text-white" ></DeleteIcon>
+                </IconButton> 
+              
+            )
+            :
             '' }
             
 

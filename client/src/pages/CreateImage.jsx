@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { preview } from "../assets";
@@ -8,15 +8,18 @@ import Loader from "../components/Loader";
 import axios from 'axios';
 
 
+const username = window.localStorage.getItem("username")
 const CreateImage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: "",
+    name: username,
     prompt: "",
     photo: "",
   });
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const CreateImage = () => {
 
       try {
           await axios.post('http://localhost:3000/api/images', {
-          name : form.name,
+          name: form.name,
           photo : form.photo,
           prompt : form.prompt
         })
@@ -89,23 +92,17 @@ const CreateImage = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto text-white">
+    <section className="max-w-7xl mx-aut">
       <div className="mx-auto w-3/4">
         <h1 className=" font-bold text-3xl">Create</h1>
         <p className="mt-3  max-w[500px text-lg">
           With the help of DALL-E create cool and imaginative AI images!
         </p>
       </div>
-      <form action="" className="mt-10 w-3/4 mx-auto" onSubmit={handleSubmit}>
+      <form  className="mt-10 w-3/4 mx-auto" onSubmit={handleSubmit}>
         <div>
-          <Form
-            labelName="Your name"
-            type="text"
-            name="name"
-            placeholder="John doe"
-            value={form.name}
-            handleChange={handleChange}
-          />
+       
+       
           <Form
             labelName="Prompt"
             type="text"
@@ -119,7 +116,7 @@ const CreateImage = () => {
           
           <div
             className="mt-5 relative bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
-             p-3  justify-center items-center w-64 h-64"
+             p-3  justify-center items-center "
           >
             {form.photo ? 
               <img
@@ -146,14 +143,14 @@ const CreateImage = () => {
           <button
             type="button"
             onClick={generateImg}
-            className="text-white bg-red-500 font-medium rounded-md text-md w-full sm:w-auto px-3 py-2 hover:translate-x-2 hover:-translate-y-1 "
+            className="text-white bg-red-400 font-medium rounded-full text-md w-full sm:w-auto px-3 py-2 hover:translate-x-2 hover:-translate-y-1 "
           >
             {generatingImg ? "Generating..." : "Generate"}
           </button>
         </div>
         <div className="mt-5 ">
               <p className="mb-3">Do you want to share your creation to the community? If so press the button below!</p>
-              <button className="text-white bg-red-500 px-3 py-2 w-full sm:w-auto hover:translate-x-2 hover:-translate-y-1" type="submit">
+              <button className="text-white bg-red-400 px-3 py-2 w-full sm:w-auto hover:translate-x-2 hover:-translate-y-1 rounded-full" type="submit">
                 { loading ? 'sharing...' : 'Share image'}
               </button>
         </div>

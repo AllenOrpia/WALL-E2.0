@@ -1,14 +1,14 @@
 import React from "react";
 import Card from "./Card";
 
-const RenderCards = ({ data, title }) => {
+const RenderCards = ({ data, title, setAllPost }) => {
   if (data?.length > 0) {
     return data.map((post, i) => (
-        <Card key={post._id} {...post} />
+        <Card key={post._id} setAllPost={setAllPost} data={data} {...post}  />
     ));
   } else {
     return (
-      <h2 className="mt-5 font-bold text-purple-500 text-xl uppercase">
+      <h2 className="mt-5 font-bold text-red-500 text-xl uppercase">
         {title}
       </h2>
     );

@@ -14,6 +14,12 @@ const Home = () => {
     
     const [searchResults, setSearchResults] = useState(null)
     const [searchTimeOut, setSearchTimeOut] = useState(null)
+
+    const filterData = (data) => {
+        setAllPost( currPost => {
+            return [...data]
+        })
+    }
   
     useEffect( () => {
         const fetchPosts = async () => {
@@ -50,9 +56,9 @@ const Home = () => {
 
   return (
    <section className='max-w-7xl mx-auto'>
-        <div className='text-white'>
+        <div className='text-black'>
             <h1 className=' font-bold text-3xl'>Community Ideas</h1>
-            <p className='mt-3 max-w[500px text-lg'>Browse and explore community creations! Find inspiration and
+            <p className='mt-3 max-w[500px text-lg text-gray-600'>Browse and explore community creations! Find inspiration and
             create your own image with the help of RapidApi's simple iteration of Open Ai's DALL-E</p>
         </div>
         <div className='mt-10'>
@@ -77,9 +83,9 @@ const Home = () => {
                 ) }
                 <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cold-1 gap-3'>
                     { searchText ? 
-                        <RenderCards data={searchResults} title='No search results found'/> 
+                        <RenderCards data={searchResults}  title='No search results found' /> 
                     :
-                        <RenderCards data={allPosts} title='No posts found'/>
+                        <RenderCards data={allPosts} setAllPost={setAllPost} title='No posts found' />
                     }
                 </div>
                 </>
