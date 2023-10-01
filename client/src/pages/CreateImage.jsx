@@ -28,7 +28,7 @@ const CreateImage = () => {
       setLoading(true);
 
       try {
-        const response =  await axios.post('http://localhost:3000/api/images', {
+        const response =  await axios.post('https://wall-e-lww3.onrender.com/api/images', {
           name: form.name,
           photo : form.photo,
           prompt : form.prompt
@@ -65,7 +65,7 @@ const CreateImage = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        await axios.post('http://localhost:3000/api/dalle', {
+        await axios.post('https://wall-e-lww3.onrender.com/api/dalle', {
           prompt: form.prompt,
         })
         .then( res => {

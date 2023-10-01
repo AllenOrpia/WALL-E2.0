@@ -31,7 +31,7 @@ const Card = ({ _id, name, photo, prompt, setAllData, data }) => {
     })
     
     try {
-      axios.get(`http://localhost:3000/api/images/${id}`)
+      axios.get(`https://wall-e-lww3.onrender.com/api/images/${id}`)
       .then( res => {
         
           console.log(res)

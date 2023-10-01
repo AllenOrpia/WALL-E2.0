@@ -23,7 +23,7 @@ const Home = () => {
         const fetchPosts = async () => {
             setLoading(true);
             try {
-                await axios.get('http://localhost:3000/api/images')
+                await axios.get('https://wall-e-lww3.onrender.com/api/images')
                 .then ( res => {
                     console.log(res.data);
                     setAllPost(res.data.data.reverse())

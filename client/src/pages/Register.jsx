@@ -21,7 +21,7 @@ const Register = () => {
     
         try {
           const response = await axios
-            .post("http://localhost:3000/api/register", {
+            .post("https://wall-e-lww3.onrender.com/api/register", {
               username: userForm.username,
               password: userForm.password,
             })
